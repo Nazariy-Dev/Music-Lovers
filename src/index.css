@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mood otions bg */
+.css-9e5uuu-MuiPaper-root-MuiAutocomplete-paper {
+  background-color: var(--fallback-b1, oklch(var(--b1)/var(--tw-bg-opacity))) !important;
+  color: var(--fallback-bc, oklch(var(--bc)/1)) !important;
+}
+
+.css-gdh49b-MuiAutocomplete-listbox .MuiAutocomplete-option[aria-selected="true"] {
+  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity))) !important;
+}
+
+.css-gdh49b-MuiAutocomplete-listbox .MuiAutocomplete-option.Mui-focused {
+  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity))) !important;
+}
+
+.css-6wwd73-MuiAutocomplete-noOptions {
+  color:  var(--fallback-bc, oklch(var(--bc)/1)) !important;
+}
