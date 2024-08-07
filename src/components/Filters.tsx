@@ -4,7 +4,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Autocomplete, TextField, debounce, styled } from '@mui/material';
 import { useMemo, useState } from "react";
-import { Link, useLoaderData, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
 import HeroWrapper from "./HeroWrapper";
 import HeroHeader from "./HeroHeader";
 
@@ -68,7 +68,7 @@ const StyledTextField = styled(TextField)`
 export default function Filters() {
     const pathname = useLoaderData();
 
-    const { control, register, handleSubmit, formState: { errors, isSubmitting, } } = useForm<FormFields>({ resolver: zodResolver(schema) })
+    const { control, handleSubmit, formState: { isSubmitting, } } = useForm<FormFields>({ resolver: zodResolver(schema) })
 
     const [searchParams] = useSearchParams();
 
@@ -76,7 +76,6 @@ export default function Filters() {
 
     const [moodsQuery, setMoodsQuery] = useState<string>('')
     const [genresQuery, setGenresQuery] = useState<string>('')
-    const [addSong, { error }] = musicLoversAPI.useAddSongMutation()
     const { data: moodsOptions = [], isLoading: moodsLoading } = musicLoversAPI.useGetMoodsQuery(moodsQuery, { skip: !moodsQuery })
     const { data: genresOptions = [], isLoading: genresLoading } = musicLoversAPI.useGetGenresQuery(genresQuery, { skip: !genresQuery })
 
@@ -89,11 +88,11 @@ export default function Filters() {
 
         params.set('page', '1');
         if (moods) {
-            params.set('moods', moodsIds.join("|"));
+            params.set('moods', moodsIds!.join("|"));
         }
 
         if (genres) {
-            params.set('genres', genresIds.join("|"));
+            params.set('genres', genresIds!.join("|"));
         }
 
         if (!moods || !genres) {
@@ -143,10 +142,10 @@ export default function Filters() {
                                     loading={moodsLoading}
                                     options={moodsOptions}
                                     getOptionLabel={(option) => option.name}
-                                    onChange={(e, value) => onChange(value)}
+                                    onChange={(_, value) => onChange(value)}
                                     isOptionEqualToValue={(option, value) => option._id === value._id}
                                     value={value}
-                                    onInputChange={(e, value) => debouncedFetchMoodsOptions(value)}
+                                    onInputChange={(_, value) => debouncedFetchMoodsOptions(value)}
                                     renderInput={(params) => (
                                         <StyledTextField {...params} placeholder="Select song mood" />
                                     )}
@@ -170,10 +169,10 @@ export default function Filters() {
                                     loading={genresLoading}
                                     options={genresOptions}
                                     getOptionLabel={(option) => option.name}
-                                    onChange={(e, value) => onChange(value)}
+                                    onChange={(_, value) => onChange(value)}
                                     isOptionEqualToValue={(option, value) => option._id === value._id}
                                     value={value}
-                                    onInputChange={(e, value) => debouncedFetchGenresOptions(value)}
+                                    onInputChange={(_, value) => debouncedFetchGenresOptions(value)}
                                     renderInput={(params) => (
                                         <StyledTextField {...params} placeholder="Select music genre" />
                                     )}
@@ -183,7 +182,6 @@ export default function Filters() {
 
                     </label>
 
-                    {error?.message && <div className='mt-2 text-error'>{error.message}</div>}
                     <button className={"btn btn-primary btn-sm" + (isSubmitting ? " btn-disabled" : '')}>Search</button>
 
 

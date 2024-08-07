@@ -1,11 +1,10 @@
 import Container from "./Container";
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks/redux";
-import { checkAuth, logout } from "../store/reducers/ActionCreators";
+import {  logout } from "../store/reducers/ActionCreators";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faUser, faWaveSquare } from '@fortawesome/free-solid-svg-icons';
+import {  faWaveSquare } from '@fortawesome/free-solid-svg-icons';
 // import { musicLoversAPI } from "../store/api/musicLoversAPI";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function Header() {

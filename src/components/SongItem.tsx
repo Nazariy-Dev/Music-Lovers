@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faInfo } from '@fortawesome/free-solid-svg-icons'
 import { SongRes } from '../models/music/songs'
 import { musicLoversAPI } from '../store/api/musicLoversAPI'
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 
 export interface SongItemProps {
     song: SongRes

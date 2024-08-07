@@ -1,9 +1,9 @@
-import { AppDispatch } from "../store";
-import { userSlice } from "./UserSlice";
+// import { AppDispatch } from "../store";
+// import { userSlice } from "./UserSlice";
 import AuthService from "../../utils/services/authService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthLoginRequest, AuthSignUpRequest } from "../../models/user/AuthRequest";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { AuthResponseSuccess } from "../../models/user/AuthResponse";
 
 

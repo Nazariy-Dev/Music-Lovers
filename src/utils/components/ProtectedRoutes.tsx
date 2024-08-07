@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux'
-import { Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 import { checkAuth } from '../../store/reducers/ActionCreators'
 import { useNavigatorOnLine } from '../hooks/useNavigatorOnLine'
 

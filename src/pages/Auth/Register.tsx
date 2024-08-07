@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { musicLoversAPI } from '../../store/api/musicLoversAPI';
-import { Link, redirect, useNavigate } from "react-router-dom";
-import { login, signUp } from '../../store/reducers/ActionCreators';
+import {  useForm } from 'react-hook-form'
+import { Link, useNavigate } from "react-router-dom";
+import { signUp } from '../../store/reducers/ActionCreators';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
 
 
@@ -63,7 +62,7 @@ export default function Login() {
                         </button>
 
                         {<div className='mt-2 text-error'>{error ? error.message : ''}</div>}
-                        <div>New to Music Lovers? <Link className='ml-4 text-info' to={"/login"}>Login</Link> </div>
+                        <div>Already has account? <Link className='ml-4 text-info' to={"/login"}>Login</Link> </div>
 
 
                     </div>

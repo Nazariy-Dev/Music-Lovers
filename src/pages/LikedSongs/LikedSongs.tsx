@@ -13,7 +13,6 @@ import Pagination from "../../components/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import NoData from "../../components/NoData";
-import SongItemSkeleton from "../../components/SongItemSkeleton";
 import SongListSketelon from "../../components/SongListSketelon";
 
 const SongInitialState = {

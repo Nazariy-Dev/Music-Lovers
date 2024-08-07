@@ -1,4 +1,3 @@
-import React from 'react'
 import { SongRes } from '../models/music/songs'
 import SongItem from './SongItem'
 

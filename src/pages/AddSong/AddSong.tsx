@@ -73,7 +73,7 @@ export default function AddSong() {
 
     const [moodsQuery, setMoodsQuery] = useState<string>('')
     const [genresQuery, setGenresQuery] = useState<string>('')
-    const [addSong, { error }] = musicLoversAPI.useAddSongMutation()
+    const [addSong, { error }] = musicLoversAPI.useAddSongMutation<{error: {message: string}}>()
     const { data: moodsOptions = [], isLoading: moodsLoading } = musicLoversAPI.useGetMoodsQuery(moodsQuery, { skip: !moodsQuery })
     const { data: genresOptions = [], isLoading: genresLoading } = musicLoversAPI.useGetGenresQuery(genresQuery, { skip: !genresQuery })
 
@@ -134,10 +134,10 @@ export default function AddSong() {
                                     loading={moodsLoading}
                                     options={moodsOptions}
                                     getOptionLabel={(option) => option.name}
-                                    onChange={(e, value) => onChange(value)}
+                                    onChange={(_, value) => onChange(value)}
                                     isOptionEqualToValue={(option, value) => option._id === value._id}
                                     value={value}
-                                    onInputChange={(e, value) => debouncedFetchMoodsOptions(value)}
+                                    onInputChange={(_, value) => debouncedFetchMoodsOptions(value)}
                                     renderInput={(params) => (
                                         <StyledTextField {...params} placeholder="Select song mood" />
                                     )}
@@ -161,10 +161,10 @@ export default function AddSong() {
                                     loading={genresLoading}
                                     options={genresOptions}
                                     getOptionLabel={(option) => option.name}
-                                    onChange={(e, value) => onChange(value)}
+                                    onChange={(_, value) => onChange(value)}
                                     isOptionEqualToValue={(option, value) => option._id === value._id}
                                     value={value}
-                                    onInputChange={(e, value) => debouncedFetchGenresOptions(value)}
+                                    onInputChange={(_, value) => debouncedFetchGenresOptions(value)}
                                     renderInput={(params) => (
                                         <StyledTextField {...params} placeholder="Select music genre" />
                                     )}

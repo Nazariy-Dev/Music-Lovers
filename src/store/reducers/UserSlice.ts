@@ -1,6 +1,6 @@
 import { PayloadAction, UnknownAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../models/user/IUser";
-import { login, checkAuth, signUp } from "./ActionCreators";
+// import { login, checkAuth, signUp } from "./ActionCreators";
 
 interface UserState {
     user: IUser,
@@ -36,16 +36,16 @@ function isUserRejectedAction(action: UnknownAction) {
     return typeof action.type === 'string' && action.type.endsWith('/rejected') && action.type.startsWith("user")
 }
 
-function isUserLogoutPendingAction(action: UnknownAction) {
-    return typeof action.type === 'string' && action.type.endsWith('logout/pending') && action.type.startsWith("user")
-}
+// function isUserLogoutPendingAction(action: UnknownAction) {
+//     return typeof action.type === 'string' && action.type.endsWith('logout/pending') && action.type.startsWith("user")
+// }
 function isUserLogoutFulfilledAction(action: UnknownAction) {
     // return typeof action.type === 'string' && action.type.endsWith('logout/fulfilled') && action.type.startsWith("user")
     return typeof action.type === 'string' && action.type == "logout"
 }
-function isUserLogoutRejectedAction(action: UnknownAction) {
-    return typeof action.type === 'string' && action.type.endsWith('logout/rejected') && action.type.startsWith("user")
-}
+// function isUserLogoutRejectedAction(action: UnknownAction) {
+//     return typeof action.type === 'string' && action.type.endsWith('logout/rejected') && action.type.startsWith("user")
+// }
 
 export const userSlice = createSlice({
     name: 'user',

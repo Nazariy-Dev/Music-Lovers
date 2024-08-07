@@ -11,9 +11,7 @@ import Pagination from '../../components/Pagination';
 import HeroWrapper from '../../components/HeroWrapper';
 import HeroHeader from '../../components/HeroHeader';
 import SongsWrapper from '../../components/SongsWrapper';
-import { skip } from 'node:test';
 import NoData from '../../components/NoData';
-import SongItemSkeleton from '../../components/SongItemSkeleton';
 import SongListSketelon from '../../components/SongListSketelon';
 
 const SongInitialState = {
