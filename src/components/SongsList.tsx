@@ -11,8 +11,6 @@ interface SongListProps {
 
 export default function SongsList(songListProps: SongListProps) {
     const { songs } = songListProps
-    console.log("🚀 ~ SongsList ~ songListProps:", songListProps)
-    // const songItemPropts = songListPros
     return (
         <>
             {songs?.map(song => (

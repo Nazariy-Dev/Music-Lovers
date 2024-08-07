@@ -83,7 +83,6 @@ export default function AddSong() {
         let genresIds = genres?.map(value => value._id)
 
         const song = await addSong({ link, moodsIds, genresIds })
-        console.log(song)
     }
 
 

@@ -11,7 +11,6 @@ export default function Header() {
 
     const dispatch = useAppDispatch()
     const { user } = useAppSelector(state => state.userReducer)
-    console.log("🚀 ~ Header ~ user:", user)
 
     return (
         <Container>

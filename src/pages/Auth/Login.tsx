@@ -17,8 +17,7 @@ export default function Login() {
     const navigate = useNavigate()
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
-    const {user, error, isAuth, isLoading } = useAppSelector(state => state.userReducer)
-    console.log("🚀 ~ Login ~ user:", user)
+    const { error, isAuth, isLoading } = useAppSelector(state => state.userReducer)
 
     function onSubmit(data: FormFields) {
         dispatch(login(data))

@@ -9,7 +9,6 @@ export default function ProtectedRoutes() {
     const { status: isOnline } = useNavigatorOnLine()
 
     const {user, isAuth, isLoading } = useAppSelector(state => state.userReducer)
-    console.log("🚀 ~ ProtectedRoutes ~ user:", user)
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
