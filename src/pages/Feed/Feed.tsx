@@ -48,7 +48,7 @@ export default function Feed() {
 
     const { user } = useAppSelector(state => state.userReducer)
 
-    const { data: favSongsIds = [], error } = musicLoversAPI.useGetFavouriteSongsIdsQuery(user?.id, { skip: !user.id })
+    const { data: favSongsIds = [] } = musicLoversAPI.useGetFavouriteSongsIdsQuery(user?.id, { skip: !user.id })
     const { data: songPage = SongsPageInitialState, isLoading: songsLoading } = musicLoversAPI.useGetSongsQuery({ currentPage, filters: { moods: moodsQuery, genres: genresQuery } });
     const { songs, totalPages } = songPage
 

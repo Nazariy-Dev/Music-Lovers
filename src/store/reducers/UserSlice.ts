@@ -40,7 +40,8 @@ function isUserLogoutPendingAction(action: UnknownAction) {
     return typeof action.type === 'string' && action.type.endsWith('logout/pending') && action.type.startsWith("user")
 }
 function isUserLogoutFulfilledAction(action: UnknownAction) {
-    return typeof action.type === 'string' && action.type.endsWith('logout/fulfilled') && action.type.startsWith("user")
+    // return typeof action.type === 'string' && action.type.endsWith('logout/fulfilled') && action.type.startsWith("user")
+    return typeof action.type === 'string' && action.type == "logout"
 }
 function isUserLogoutRejectedAction(action: UnknownAction) {
     return typeof action.type === 'string' && action.type.endsWith('logout/rejected') && action.type.startsWith("user")
@@ -55,7 +56,7 @@ export const userSlice = createSlice({
         builder
             .addMatcher(isUserFulfilledAction, (state, action: PayloadAction<IUser>) => {
                 state.isLoading = false;
-                state.error = '';
+                state.error.message = '';
                 state.user = action.payload;
                 state.isAuth = true
             })

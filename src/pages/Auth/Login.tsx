@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { musicLoversAPI } from '../../store/api/musicLoversAPI';
+import {  useForm } from 'react-hook-form'
 import { useNavigate, Link } from "react-router-dom";
 import { login } from '../../store/reducers/ActionCreators';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
-import { useDisplayMessage } from '../../utils/hooks/useDisplayMessage';
-
 
 const schema = z.object({
     email: z.string().email(),
@@ -19,11 +15,10 @@ type FormFields = z.infer<typeof schema>
 export default function Login() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const {isVisible, message} = useDisplayMessage()
-    console.log(message)
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
-    const { error, isAuth, isLoading } = useAppSelector(state => state.userReducer)
+    const {user, error, isAuth, isLoading } = useAppSelector(state => state.userReducer)
+    console.log("🚀 ~ Login ~ user:", user)
 
     function onSubmit(data: FormFields) {
         dispatch(login(data))

@@ -12,6 +12,7 @@ export default function Header() {
 
     const dispatch = useAppDispatch()
     const { user } = useAppSelector(state => state.userReducer)
+    console.log("🚀 ~ Header ~ user:", user)
 
     return (
         <Container>
@@ -50,7 +51,7 @@ export default function Header() {
                         <ul tabIndex={0} className=" menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
                             <li>
                                 <a className="justify-between">
-                                    Hello, {user?.name}
+                                    Hello, {user.name}
                                 </a>
                             </li>
 
