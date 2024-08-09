@@ -39,6 +39,7 @@ export const checkAuth: AsyncThunk<IUser, void, any> = createAsyncThunk(
     'user/checkAuth',
     async (_, thunkAPI) => {
         try {
+
             const response = await axios.get<AuthResponseSuccess>(`${API_URL}/refresh`, {
                 withCredentials: true
             })
@@ -53,6 +54,7 @@ export const checkAuth: AsyncThunk<IUser, void, any> = createAsyncThunk(
 export const logout: AsyncThunk<any, void, any> = createAsyncThunk(
     'logout',
     async (_, thunkAPI) => {
+
         try {
             await AuthService.logout();
             localStorage.removeItem('token');

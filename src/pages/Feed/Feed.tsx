@@ -47,9 +47,9 @@ export default function Feed() {
     const { user } = useAppSelector(state => state.userReducer)
 
     const { data: favSongsIds = [] } = musicLoversAPI.useGetFavouriteSongsIdsQuery(user?.id, { skip: !user.id })
-    const { data: songPage = SongsPageInitialState, isLoading: songsLoading } = musicLoversAPI.useGetSongsQuery({ currentPage, filters: { moods: moodsQuery, genres: genresQuery } });
+    const { data: songPage = SongsPageInitialState, isFetching: songsLoading } = musicLoversAPI.useGetSongsQuery({ currentPage, filters: { moods: moodsQuery, genres: genresQuery } });
     const { songs, totalPages } = songPage
-
+    
 
     return (
         <HeroWrapper>
@@ -65,14 +65,8 @@ export default function Feed() {
             </div>
             <div className={"grid grid-rows-[1fr_auto] bg-neutral p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
                 <SongsWrapper>
-                    {songsLoading && <SongListSketelon />}
-
-                    {(songs.length > 0 && user) ?
-                        songs?.map(song => <SongItem song={song} setSong={setSong} setShowModal={setShowModal} key={song._id} user={user.id} isLiked={favSongsIds?.some(likedSongId => likedSongId === song._id)} />)
-                        :
-                        <NoData />
-                    }
-
+                    {songsLoading ? <SongListSketelon /> : songs?.map(song => <SongItem song={song} setSong={setSong} setShowModal={setShowModal} key={song._id} user={user.id} isLiked={favSongsIds?.some(likedSongId => likedSongId === song._id)} />)}
+                    {(songs.length ==0 && !songsLoading) && <NoData/>}
                 </SongsWrapper>
                 {showModal && <SongInfo song={song} setShowModal={setShowModal} />}
                 <div className={(showModal ? 'col-span-2' : '')}>

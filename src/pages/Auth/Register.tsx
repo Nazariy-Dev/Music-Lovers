@@ -5,6 +5,8 @@ import {  useForm } from 'react-hook-form'
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from '../../store/reducers/ActionCreators';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
+import { useNavigatorOnLine } from '../../utils/hooks/useNavigatorOnLine';
+import OfflineMessage from '../../utils/components/ui/OfflineMessage';
 
 
 const schema = z.object({
@@ -18,17 +20,23 @@ type FormFields = z.infer<typeof schema>
 export default function Login() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const { status: isOnline } = useNavigatorOnLine()
+
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
-    const { error, isAuth, isLoading } = useAppSelector(state => state.userReducer)
+    const { error, isLoading } = useAppSelector(state => state.userReducer)
 
     function onSubmit(data: FormFields) {
         dispatch(signUp(data))
+        navigate("/")
+
     }
 
-    if (isAuth) {
-        navigate("/")
-    }
+    if (!isOnline) {
+         return (
+             <OfflineMessage />
+         )
+     }
 
     return (
         <div className='flex items-center justify-center h-screen w-full'>

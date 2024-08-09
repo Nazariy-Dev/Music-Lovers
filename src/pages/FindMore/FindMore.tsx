@@ -44,7 +44,7 @@ export default function FindMore() {
     const [song, setSong] = useState<SongRes>(SongInitialState)
     const [showModal, setShowModal] = useState(false)
     const { user } = useAppSelector(state => state.userReducer)
-    const { data: favSongsIds = [], isLoading: songsLoading} = musicLoversAPI.useGetFavouriteSongsIdsQuery(user?.id, { skip: !(user.id) })
+    const { data: favSongsIds = [], isFetching: songsLoading } = musicLoversAPI.useGetFavouriteSongsIdsQuery(user?.id, { skip: !(user.id) })
     const { data: songPage = SongsPageInitialState } = musicLoversAPI.useDiscoverSongsQuery({ userId: user.id, currentPage, filters: { moods: moodsQuery, genres: genresQuery } });
     const { songs, totalPages } = songPage
 
@@ -63,13 +63,14 @@ export default function FindMore() {
             </div>
             <div className={"grid grid-rows-[1fr_auto] bg-neutral p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
                 <SongsWrapper>
-                    {songsLoading && <SongListSketelon/>}
-                    {songs.length > 0
+                    {songsLoading
                         ?
-                        songs?.map(song => <SongItem song={song} setSong={setSong} setShowModal={setShowModal} key={song._id} user={user.id} isLiked={favSongsIds?.some(likedSongId => likedSongId == song._id)} />)
+                        <SongListSketelon />
                         :
-                        <NoData /> 
+                        songs?.map(song => <SongItem song={song} setSong={setSong} setShowModal={setShowModal} key={song._id} user={user.id} isLiked={favSongsIds?.some(likedSongId => likedSongId == song._id)} />)
                     }
+                    {(songs.length ==0 && !songsLoading) && <NoData/>}
+
                 </SongsWrapper>
                 {showModal && <SongInfo song={song} setShowModal={setShowModal} />}
                 <div className={(showModal ? 'col-span-2' : '')}>

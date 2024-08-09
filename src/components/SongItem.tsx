@@ -14,10 +14,10 @@ export interface SongItemProps {
 
 function SongItem({ setShowModal, setSong, user, isLiked, song }: SongItemProps) {
     const [toggleFavourite] = musicLoversAPI.useToggleFavouriteMutation()
-    const { link, songDetails } = song
+    const { songDetails, _id } = song
 
     const onToggleFavourite = () => {
-        toggleFavourite({ user, link })
+        toggleFavourite({ user, _id })
     }
 
     const onInfoClick = () => {
@@ -38,7 +38,7 @@ function SongItem({ setShowModal, setSong, user, isLiked, song }: SongItemProps)
                 </div>
             </div>
             <div className='flex gap-2'>
-                <div className='btn btn-primary btn-sm' onClick={() => onToggleFavourite()}>
+                <div className={'btn btn-primary btn-sm'} onClick={() => onToggleFavourite()}>
                     <FontAwesomeIcon size="xl" className={isLiked ? "text-white" : ''} icon={faHeart} />
                 </div>
                 <div className='btn btn-secondary btn-sm ' onClick={() => onInfoClick()}>

@@ -1,8 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "../../utils/services/axiosService";
 import { AddFav, LabelRes, SongPage, SongPageParams, SongReq, SongRes } from "../../models/music/songs";
-// import { AuthResponseSuccess } from "../../models/user/AuthResponse";
-// import { AuthLoginRequest, AuthSignUpRequest } from "../../models/user/AuthRequest";
 
 export const musicLoversAPI = createApi({
     reducerPath: 'musicLoversAPI',
@@ -106,11 +104,28 @@ export const musicLoversAPI = createApi({
                 invalidatesTags: ["Songs"],
             }),
             toggleFavourite: build.mutation<any, AddFav>({
-                query: ({ user, link }) => ({
+                query: ({ user, _id }) => ({
                     url: '/users',
-                    data: { user, link },
+                    data: { user, _id },
                     method: 'patch'
                 }),
+                async onQueryStarted({ _id, user }, { dispatch, queryFulfilled }) {
+                    // Update the cached data for getSongs query
+                    const patchResult = dispatch(
+                        musicLoversAPI.util.updateQueryData('getFavouriteSongsIds', user, (draft) => {
+                            const index = draft.indexOf(_id)
+                            const isInCashe = index != -1
+                            isInCashe ? draft.splice(index) : draft.push(_id);
+                        })
+                    );
+
+                    try {
+                        await queryFulfilled;
+                    } catch {
+                        patchResult.undo();
+                    }
+                },
+
                 invalidatesTags: ["FavouriteSongs", "FavouriteSongsIds", "DiscoverSongs"],
             }),
             getMoods: build.query<LabelRes[], string>({

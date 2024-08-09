@@ -1,9 +1,11 @@
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
-import {  useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from "react-router-dom";
 import { login } from '../../store/reducers/ActionCreators';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
+import { useNavigatorOnLine } from '../../utils/hooks/useNavigatorOnLine';
+import OfflineMessage from '../../utils/components/ui/OfflineMessage';
 
 const schema = z.object({
     email: z.string().email(),
@@ -15,16 +17,21 @@ type FormFields = z.infer<typeof schema>
 export default function Login() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const { status: isOnline } = useNavigatorOnLine()
+
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
-    const { error, isAuth, isLoading } = useAppSelector(state => state.userReducer)
+    const { error, isLoading } = useAppSelector(state => state.userReducer)
 
     function onSubmit(data: FormFields) {
         dispatch(login(data))
+        navigate("/")
     }
 
-    if (isAuth) {
-        navigate("/")
+    if (!isOnline) {
+        return (
+            <OfflineMessage />
+        )
     }
 
     return (
@@ -52,7 +59,6 @@ export default function Login() {
                         <button className={"btn btn-primary btn-md" + (isLoading ? " btn-disabled" : '')}>Login
                         </button>
                         <div>New to Music Lovers? <Link className='ml-4 text-info' to={"/register"}>Sing Up</Link> </div>
-
                         {<div className='mt-2 text-error'>{error ? error.message : ''}</div>}
 
                     </div>

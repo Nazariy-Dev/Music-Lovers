@@ -20,10 +20,10 @@ function Label({ color, label }: LabelProps) {
 
 export default function SongInfo({ setShowModal, song }: SongItemProps) {
     return (
-        <div className="rounded-btn flex gap-4 flex-col bg-base-200 p-4 h-full relative overflow-y-auto">
-            <button className="absolute top-0 right-0 w-1 btn btn-accent btn-sm" onClick={() => setShowModal(false)}>X</button>
+        <div className="relative rounded-btn flex gap-4 flex-col bg-base-200 p-4 h-full overflow-y-auto">
+            <button className="absolute top-0 right-0 w-1 h-1 btn btn-accent btn-sm" onClick={() => setShowModal(false)}>X</button>
 
-            <h2 className="text-4xl font-bold mb-2">{song.songDetails.title}</h2>
+            <h2 className="text-4xl font-bold mt-3 mb-2">{song.songDetails.title}</h2>
 
             <a href={song.link} target="_blank" className="mb-2 cursor-pointer relative pb-[55%] h-0 border-solid border-primary border-2 rounded-btn">
                 <img className="rounded-btn absolute top-0 left-0 w-full h-full object-cover" src={song.songDetails.thumbnail.url} alt="" />

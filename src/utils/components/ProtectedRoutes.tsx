@@ -3,12 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks/redux'
 import { Outlet, Navigate } from 'react-router-dom'
 import { checkAuth } from '../../store/reducers/ActionCreators'
 import { useNavigatorOnLine } from '../hooks/useNavigatorOnLine'
+import LoadingsBars from './ui/LoadingsBars'
+import OfflineMessage from './ui/OfflineMessage'
 
 export default function ProtectedRoutes() {
     const dispatch = useAppDispatch()
     const { status: isOnline } = useNavigatorOnLine()
 
-    const {user, isAuth, isLoading } = useAppSelector(state => state.userReducer)
+    const { isAuth, isLoading, isCheckingAuth } = useAppSelector(state => state.userReducer)
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -16,19 +18,18 @@ export default function ProtectedRoutes() {
         }
     }, [])
 
+ 
+
     if (!isOnline) {
         return (
-            <span className="text-4xl font-bold absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                You are offline
-            </span>
+          <OfflineMessage/>
         )
     }
 
     if (isLoading) {
-        return <span className=" absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 loading loading-bars loading-lg"></span>
+        return <LoadingsBars/>
     }
-
-    if (!isAuth) {
+    if (!isAuth && !isCheckingAuth) {
         return <Navigate to={"../login"} />
     }
 

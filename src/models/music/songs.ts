@@ -47,7 +47,8 @@ export interface LabelRes {
 
 export interface AddFav {
     user: string,
-    link: string
+    // link: string
+    _id: string
 }
 
 export interface Labels {

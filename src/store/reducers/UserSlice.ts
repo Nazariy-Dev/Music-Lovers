@@ -9,6 +9,7 @@ interface UserState {
         message: string
     },
     isAuth: boolean,
+    isCheckingAuth: boolean 
 }
 
 const initialState: UserState = {
@@ -20,8 +21,9 @@ const initialState: UserState = {
         likedSongs: []
     },
     isLoading: false,
-    error: {message: ''},
-    isAuth: false
+    error: { message: '' },
+    isAuth: false,
+    isCheckingAuth: true 
 }
 
 // if we don't specify startsWith("user"), when songs are fetched, they will be added to user state
@@ -41,7 +43,7 @@ function isUserRejectedAction(action: UnknownAction) {
 // }
 function isUserLogoutFulfilledAction(action: UnknownAction) {
     // return typeof action.type === 'string' && action.type.endsWith('logout/fulfilled') && action.type.startsWith("user")
-    return typeof action.type === 'string' && action.type == "logout"
+    return typeof action.type === 'string' && action.type.includes("logout")
 }
 // function isUserLogoutRejectedAction(action: UnknownAction) {
 //     return typeof action.type === 'string' && action.type.endsWith('logout/rejected') && action.type.startsWith("user")
@@ -62,14 +64,19 @@ export const userSlice = createSlice({
             })
             .addMatcher(isUserPendingAction, (state) => {
                 state.isLoading = true;
+                state.isCheckingAuth = true
             })
-            .addMatcher(isUserRejectedAction, (state, action: PayloadAction<{message: string}>) => {
+            .addMatcher(isUserRejectedAction, (state, action: PayloadAction<{ message: string }>) => {
                 state.isLoading = false;
                 state.error = action.payload;
+                state.isCheckingAuth = false
+
             })
             .addMatcher(isUserLogoutFulfilledAction, (state) => {
                 state.user = initialState.user
                 state.isAuth = false
+                state.isCheckingAuth = false
+
             })
     }
 })

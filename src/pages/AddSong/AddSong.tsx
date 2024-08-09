@@ -4,7 +4,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Autocomplete, TextField, debounce, styled } from '@mui/material';
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeroWrapper from "../../components/HeroWrapper";
 import HeroHeader from "../../components/HeroHeader";
 
@@ -70,6 +70,8 @@ const StyledTextField = styled(TextField)` */
 
 export default function AddSong() {
     const { control, register, handleSubmit, formState: { errors, isSubmitting, } } = useForm<FormFields>({ resolver: zodResolver(schema) })
+    const navigate = useNavigate()
+
 
     const [moodsQuery, setMoodsQuery] = useState<string>('')
     const [genresQuery, setGenresQuery] = useState<string>('')
@@ -82,7 +84,9 @@ export default function AddSong() {
         let moodsIds = moods?.map(value => value._id)
         let genresIds = genres?.map(value => value._id)
 
-        const song = await addSong({ link, moodsIds, genresIds })
+        await addSong({ link, moodsIds, genresIds })
+        navigate("/")
+
     }
 
 
