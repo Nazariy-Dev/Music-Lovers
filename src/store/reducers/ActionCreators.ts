@@ -39,7 +39,6 @@ export const checkAuth: AsyncThunk<IUser, void, any> = createAsyncThunk(
     'user/checkAuth',
     async (_, thunkAPI) => {
         try {
-
             const response = await axios.get<AuthResponseSuccess>(`${API_URL}/refresh`, {
                 withCredentials: true
             })

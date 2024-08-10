@@ -18,19 +18,18 @@ export default function ProtectedRoutes() {
         }
     }, [])
 
- 
-
     if (!isOnline) {
         return (
-          <OfflineMessage/>
+            <OfflineMessage />
         )
     }
 
     if (isLoading) {
-        return <LoadingsBars/>
+        return <LoadingsBars />
     }
-    if (!isAuth && !isCheckingAuth) {
-        return <Navigate to={"../landing"} />
+
+    if (!isAuth) {
+        return <Navigate to={"/login"} />
     }
 
     return <Outlet />

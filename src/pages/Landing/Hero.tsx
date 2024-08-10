@@ -8,7 +8,7 @@ export default function Hero() {
                 <div className="max-w-md">
                     <h1 className="mb-5 text-5xl font-bold">WELCOME TO MUSIC LOVERS</h1>
                     <p className="mb-5 text-xl font-bold">
-                        Join and find new amazing music and share your taste to the world
+                        Join to find new amazing music and share your taste to the world
                     </p>
                     <button onClick={() => window.location.href = "#about"} className="btn btn-primary">Get Started</button>
                 </div>

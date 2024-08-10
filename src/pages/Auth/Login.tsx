@@ -6,6 +6,7 @@ import { login } from '../../store/reducers/ActionCreators';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
 import { useNavigatorOnLine } from '../../utils/hooks/useNavigatorOnLine';
 import OfflineMessage from '../../utils/components/ui/OfflineMessage';
+import LoadingsBars from '../../utils/components/ui/LoadingsBars';
 
 const schema = z.object({
     email: z.string().email(),
@@ -21,11 +22,11 @@ export default function Login() {
 
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
-    const { error, isLoading } = useAppSelector(state => state.userReducer)
+    const { isAuth, error, isLoading } = useAppSelector(state => state.userReducer)
 
     function onSubmit(data: FormFields) {
         dispatch(login(data))
-        navigate("/")
+        // navigate("../")
     }
 
     if (!isOnline) {
@@ -34,37 +35,45 @@ export default function Login() {
         )
     }
 
-    return (
-        <div className='flex items-center justify-center h-screen w-full'>
-            <div className='max-w-[400px] w-full'>
-                <h1 className=' text-center text-5xl font-bold mb-4'>Login</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='flex flex-col gap-4'>
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text">Email</span>
-                            </div>
-                            <input {...register("email")} type="text" placeholder="Type here" className="input input-bordered w-full" />
-                            {errors.email && <div className='mt-2 text-error'>{errors.email.message}</div>}
+    if (isLoading) {
+        return <LoadingsBars />
+    }
 
-                        </label>
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text">Password</span>
-                            </div>
-                            <input {...register("password")} type="text" placeholder="Type here" className="input input-bordered w-full" />
-                            {errors.password && <div className='mt-2 text-error'>{errors.password.message}</div>}
+    if (isAuth) {
+        navigate("/")
+    }
 
-                        </label>
-                        <button className={"btn btn-primary btn-md" + (isLoading ? " btn-disabled" : '')}>Login
-                        </button>
-                        <div>New to Music Lovers? <Link className='ml-4 text-info' to={"/register"}>Sing Up</Link> </div>
-                        {<div className='mt-2 text-error'>{error ? error.message : ''}</div>}
+        return (
+            <div className='flex items-center justify-center h-screen w-full'>
+                <div className='max-w-[400px] w-full'>
+                    <h1 className=' text-center text-5xl font-bold mb-4'>Login</h1>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className='flex flex-col gap-4'>
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Email</span>
+                                </div>
+                                <input {...register("email")} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                                {errors.email && <div className='mt-2 text-error'>{errors.email.message}</div>}
 
-                    </div>
-                </form>
-            </div>
-        </div >
+                            </label>
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Password</span>
+                                </div>
+                                <input {...register("password")} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                                {errors.password && <div className='mt-2 text-error'>{errors.password.message}</div>}
 
-    )
+                            </label>
+                            <button className={"btn btn-primary btn-md" + (isLoading ? " btn-disabled" : '')}>Login
+                            </button>
+                            <div>New to Music Lovers? <Link className='ml-4 text-info' to={"/register"}>Sing Up</Link> </div>
+                            {<div className='mt-2 text-error'>{error ? error.message : ''}</div>}
+
+                        </div>
+                    </form>
+                </div>
+            </div >
+
+        )
 }

@@ -50,9 +50,6 @@ export default function LikedSongs() {
     const [song, setSong] = useState<SongRes>(SongInitialState)
     const [showModal, setShowModal] = useState(false)
 
-
-    console.log("🚀 ~ FindMore ~ songsLoading:", songsLoading)
-
     return (
         <HeroWrapper>
             <div className='flex justify-between items-center mb-6'>

@@ -7,6 +7,7 @@ import { signUp } from '../../store/reducers/ActionCreators';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
 import { useNavigatorOnLine } from '../../utils/hooks/useNavigatorOnLine';
 import OfflineMessage from '../../utils/components/ui/OfflineMessage';
+import LoadingsBars from '../../utils/components/ui/LoadingsBars';
 
 
 const schema = z.object({
@@ -24,12 +25,10 @@ export default function Login() {
 
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
-    const { error, isLoading } = useAppSelector(state => state.userReducer)
+    const { error, isLoading, isAuth } = useAppSelector(state => state.userReducer)
 
     function onSubmit(data: FormFields) {
         dispatch(signUp(data))
-        navigate("/")
-
     }
 
     if (!isOnline) {
@@ -37,6 +36,14 @@ export default function Login() {
              <OfflineMessage />
          )
      }
+
+     if (isLoading) {
+        return <LoadingsBars />
+    }
+
+    if (isAuth) {
+        navigate("/")
+    }
 
     return (
         <div className='flex items-center justify-center h-screen w-full'>

@@ -11,7 +11,7 @@ import Section from "./components/Section";
 export default function HowToUse() {
     return (
         <Section id={"howToUse"}>
-            <SectionHeader>How to use out service?</SectionHeader>
+            <SectionHeader>How to use our service?</SectionHeader>
             <div className="flex flex-col gap-10 md:gap-6">
                 <InfoBlock
                     title="Log In or Sing Up to start the journey"
@@ -53,7 +53,6 @@ export default function HowToUse() {
                     imageUrl={AddSongImg}
                     direction="reverse"
                     className="animation-view animate-appear "
-
                 />
             </div>
         </Section>

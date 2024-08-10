@@ -61,22 +61,21 @@ export const userSlice = createSlice({
                 state.error.message = '';
                 state.user = action.payload;
                 state.isAuth = true
+                // state.isCheckingAuth = false
             })
             .addMatcher(isUserPendingAction, (state) => {
                 state.isLoading = true;
-                state.isCheckingAuth = true
+                // state.isCheckingAuth = true
             })
             .addMatcher(isUserRejectedAction, (state, action: PayloadAction<{ message: string }>) => {
                 state.isLoading = false;
                 state.error = action.payload;
-                state.isCheckingAuth = false
+                // state.isCheckingAuth = false
 
             })
             .addMatcher(isUserLogoutFulfilledAction, (state) => {
                 state.user = initialState.user
                 state.isAuth = false
-                state.isCheckingAuth = false
-
             })
     }
 })

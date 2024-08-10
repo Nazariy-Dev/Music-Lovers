@@ -48,9 +48,6 @@ export default function FindMore() {
     const { data: songPage = SongsPageInitialState } = musicLoversAPI.useDiscoverSongsQuery({ userId: user.id, currentPage, filters: { moods: moodsQuery, genres: genresQuery } });
     const { songs, totalPages } = songPage
 
-    console.log("🚀 ~ FindMore ~ songsLoading:", songsLoading)
-
-
     return (
         <HeroWrapper>
             <div className='flex justify-between items-center mb-6'>
