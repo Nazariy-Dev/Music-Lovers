@@ -63,8 +63,8 @@ export default function Feed() {
                     </Link>
                 </div>
             </div>
-            <div className={"grid grid-rows-[1fr_auto] bg-neutral p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
-                <SongsWrapper>
+            <div className={"grid grid-rows-[1fr_auto] grid-cols-1 bg-neutral p-3 sm:p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' ' : ' sm:grid-cols-[1fr_50%]  gap-y-4 gap-x-0 sm:gap-x-4')}>
+                <SongsWrapper className={ (showModal ? "sm:flex hidden " : ' flex')}>
                     {songsLoading ? <SongListSketelon /> : songs?.map(song => <SongItem song={song} setSong={setSong} setShowModal={setShowModal} key={song._id} user={user.id} isLiked={favSongsIds?.some(likedSongId => likedSongId === song._id)} />)}
                     {(songs.length ==0 && !songsLoading) && <NoData/>}
                 </SongsWrapper>

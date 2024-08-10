@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client'
-import { setupStore } from './store/store.ts'
 import './index.css'
+import { setupStore } from './store/store.ts'
 import { Provider } from 'react-redux'
-const store = setupStore()
 
+const store = setupStore()
 
 import {
   createBrowserRouter,
@@ -21,6 +21,7 @@ import Filters from './components/Filters.tsx'
 import LikedSongs from './pages/LikedSongs/LikedSongs.tsx'
 import FindMore from './pages/FindMore/FindMore.tsx'
 import ProtectedRoutes from './utils/components/ProtectedRoutes.tsx'
+import Landing from './pages/Landing/Landing.tsx'
 
 const Root = () => {
   return (
@@ -45,8 +46,8 @@ const router = createBrowserRouter(
       </Route>
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
+      <Route path='landing' element={<Landing/>} />
     </>
-
   )
 );
 

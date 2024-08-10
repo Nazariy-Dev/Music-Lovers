@@ -2,10 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.animation-view {
+  animation-timeline: view();
+  animation-timeline: view();
+  animation-range: entry 0 cover 40%;
+}
+
 html,
 body,
 #root {
   height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 
@@ -21,13 +31,13 @@ body,
 }
 
 .css-gdh49b-MuiAutocomplete-listbox .MuiAutocomplete-option[aria-selected="true"] {
-  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity))) !important;
+  background-color: var(--fallback-n, oklch(var(--n)/var(--tw-bg-opacity))) !important;
 }
 
 .css-gdh49b-MuiAutocomplete-listbox .MuiAutocomplete-option.Mui-focused {
-  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity))) !important;
+  background-color: var(--fallback-n, oklch(var(--n)/var(--tw-bg-opacity))) !important;
 }
 
 .css-6wwd73-MuiAutocomplete-noOptions {
-  color:  var(--fallback-bc, oklch(var(--bc)/1)) !important;
+  color: var(--fallback-bc, oklch(var(--bc)/1)) !important;
 }

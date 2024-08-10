@@ -30,7 +30,7 @@ export default function ProtectedRoutes() {
         return <LoadingsBars/>
     }
     if (!isAuth && !isCheckingAuth) {
-        return <Navigate to={"../login"} />
+        return <Navigate to={"../landing"} />
     }
 
     return <Outlet />

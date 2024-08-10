@@ -48,6 +48,8 @@ export default function FindMore() {
     const { data: songPage = SongsPageInitialState } = musicLoversAPI.useDiscoverSongsQuery({ userId: user.id, currentPage, filters: { moods: moodsQuery, genres: genresQuery } });
     const { songs, totalPages } = songPage
 
+    console.log("🚀 ~ FindMore ~ songsLoading:", songsLoading)
+
 
     return (
         <HeroWrapper>
@@ -61,7 +63,7 @@ export default function FindMore() {
                     </Link>
                 </div>
             </div>
-            <div className={"grid grid-rows-[1fr_auto] bg-neutral p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
+            <div className={"grid grid-rows-[1fr_auto] bg-neutral p-3 sm:p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
                 <SongsWrapper>
                     {songsLoading
                         ?

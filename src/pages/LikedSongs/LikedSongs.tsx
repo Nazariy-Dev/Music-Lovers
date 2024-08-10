@@ -50,6 +50,9 @@ export default function LikedSongs() {
     const [song, setSong] = useState<SongRes>(SongInitialState)
     const [showModal, setShowModal] = useState(false)
 
+
+    console.log("🚀 ~ FindMore ~ songsLoading:", songsLoading)
+
     return (
         <HeroWrapper>
             <div className='flex justify-between items-center mb-6'>
@@ -62,7 +65,7 @@ export default function LikedSongs() {
                     </Link>
                 </div>
             </div>
-            <div className={"grid grid-rows-[1fr_auto] bg-neutral p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
+            <div className={"grid grid-rows-[1fr_auto] bg-neutral p-3 sm:p-4 w-full flex-1 gap-4 rounded-t-box overflow-hidden" + (!showModal ? ' grid-cols-1' : ' grid-cols-[1fr_50%]')}>
                 <SongsWrapper>
                     {songsLoading
                         ?
@@ -70,7 +73,7 @@ export default function LikedSongs() {
                         :
                         songs?.map(song => <SongItem song={song} setSong={setSong} setShowModal={setShowModal} key={song._id} user={user.id} isLiked={songs?.some(likedSong => likedSong._id == song._id)} />)
                     }
-                    {(songs.length ==0 && !songsLoading) && <NoData/>}
+                    {(songs.length == 0 && !songsLoading) && <NoData />}
                 </SongsWrapper>
                 {showModal && <SongInfo song={song} setShowModal={setShowModal} />}
                 <div className={(showModal ? 'col-span-2' : '')}>
