@@ -1,4 +1,4 @@
-˝˝export default function Hero() {
+export default function Hero() {
     return (
         <div
             className="hero min-h-screen bg-gradient-to-b from-primary to-secondary"
