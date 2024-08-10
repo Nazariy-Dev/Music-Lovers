@@ -10,7 +10,7 @@ export default function ProtectedRoutes() {
     const dispatch = useAppDispatch()
     const { status: isOnline } = useNavigatorOnLine()
 
-    const { isAuth, isLoading, isCheckingAuth } = useAppSelector(state => state.userReducer)
+    const { isAuth, isLoading } = useAppSelector(state => state.userReducer)
 
     useEffect(() => {
         if (localStorage.getItem('token')) {

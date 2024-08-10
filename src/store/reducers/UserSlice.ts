@@ -9,7 +9,6 @@ interface UserState {
         message: string
     },
     isAuth: boolean,
-    isCheckingAuth: boolean 
 }
 
 const initialState: UserState = {
@@ -23,7 +22,6 @@ const initialState: UserState = {
     isLoading: false,
     error: { message: '' },
     isAuth: false,
-    isCheckingAuth: true 
 }
 
 // if we don't specify startsWith("user"), when songs are fetched, they will be added to user state
@@ -61,17 +59,13 @@ export const userSlice = createSlice({
                 state.error.message = '';
                 state.user = action.payload;
                 state.isAuth = true
-                // state.isCheckingAuth = false
             })
             .addMatcher(isUserPendingAction, (state) => {
                 state.isLoading = true;
-                // state.isCheckingAuth = true
             })
             .addMatcher(isUserRejectedAction, (state, action: PayloadAction<{ message: string }>) => {
                 state.isLoading = false;
                 state.error = action.payload;
-                // state.isCheckingAuth = false
-
             })
             .addMatcher(isUserLogoutFulfilledAction, (state) => {
                 state.user = initialState.user
