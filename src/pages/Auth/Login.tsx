@@ -21,7 +21,7 @@ export default function Login() {
     const { status: isOnline } = useNavigatorOnLine()
 
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({ resolver: zodResolver(schema) })
+    const { register, handleSubmit, formState: { errors, isDirty } } = useForm<FormFields>({ resolver: zodResolver(schema) })
     const { isAuth, error, isLoading } = useAppSelector(state => state.userReducer)
 
     function onSubmit(data: FormFields) {
@@ -68,7 +68,7 @@ export default function Login() {
                             <button className={"btn btn-primary btn-md" + (isLoading ? " btn-disabled" : '')}>Login
                             </button>
                             <div>New to Music Lovers? <Link className='ml-4 text-info' to={"/register"}>Sing Up</Link> </div>
-                            {<div className='mt-2 text-error'>{error ? error.message : ''}</div>}
+                            {isDirty && <div className='mt-2 text-error'>{error ? error.message : ''}</div>}
 
                         </div>
                     </form>
