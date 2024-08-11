@@ -22,7 +22,6 @@ import LikedSongs from './pages/LikedSongs/LikedSongs.tsx'
 import FindMore from './pages/FindMore/FindMore.tsx'
 import ProtectedRoutes from './utils/components/ProtectedRoutes.tsx'
 import Landing from './pages/Landing/Landing.tsx'
-import { StrictMode } from 'react'
 
 const Root = () => {
   return (
