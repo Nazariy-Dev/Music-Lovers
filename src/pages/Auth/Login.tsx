@@ -44,7 +44,7 @@ export default function Login() {
     }
 
         return (
-            <div className='flex items-center justify-center h-screen w-full'>
+            <div className='flex items-center justify-center h-screen w-full p-4'>
                 <div className='max-w-[400px] w-full'>
                     <h1 className=' text-center text-5xl font-bold mb-4'>Login</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>

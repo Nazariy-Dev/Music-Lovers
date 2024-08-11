@@ -115,7 +115,7 @@ export const musicLoversAPI = createApi({
                         musicLoversAPI.util.updateQueryData('getFavouriteSongsIds', user, (draft) => {
                             const index = draft.indexOf(_id)
                             const isInCashe = index != -1
-                            isInCashe ? draft.splice(index) : draft.push(_id);
+                            isInCashe ? draft.splice(index, 1) : draft.push(_id);
                         })
                     );
 
