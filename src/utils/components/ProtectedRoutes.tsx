@@ -29,7 +29,7 @@ export default function ProtectedRoutes() {
     }
 
     if (!isAuth) {
-        return <Navigate to={"/landing"} replace={true} />
+        return <Navigate to={"/landing"} />
     }
 
     return <Outlet />

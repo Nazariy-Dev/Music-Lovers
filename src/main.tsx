@@ -47,6 +47,7 @@ const router = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
       <Route path='landing' element={<Landing />} />
+      {/* <Route path='*' element={<Landing />} /> */}
     </>
   )
 );
@@ -54,9 +55,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 root.render(
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 )
 
 function loader({ params }: any) {
